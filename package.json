@@ -14,7 +14,11 @@
 		"node-addon",
 		"curve25519"
 	],
-	"files": ["index.d.ts", "index.js", "browser.js"],
+	"files": [
+		"index.d.ts",
+		"index.js",
+		"browser.js"
+	],
 	"napi": {
 		"binaryName": "curve25519",
 		"targets": [
@@ -69,9 +73,15 @@
 		"typescript": "^5.9.2"
 	},
 	"lint-staged": {
-		"*.@(js|ts|tsx)": ["oxlint --fix"],
-		"*.@(js|ts|tsx|yml|yaml|md|json)": ["prettier --write"],
-		"*.toml": ["taplo format"]
+		"*.@(js|ts|tsx)": [
+			"oxlint --fix"
+		],
+		"*.@(js|ts|tsx|yml|yaml|md|json)": [
+			"prettier --write"
+		],
+		"*.toml": [
+			"taplo format"
+		]
 	},
 	"ava": {
 		"extensions": {
@@ -82,7 +92,10 @@
 		"environmentVariables": {
 			"OXC_TSCONFIG_PATH": "./__test__/tsconfig.json"
 		},
-		"nodeArguments": ["--import", "@oxc-node/core/register"]
+		"nodeArguments": [
+			"--import",
+			"@oxc-node/core/register"
+		]
 	},
 	"prettier": {
 		"printWidth": 120,
