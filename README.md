@@ -71,42 +71,46 @@ This package ships prebuilt native binaries via napi-rs for all major platforms 
 
 ## Usage
 
-```js
-/*
+```js/*/*
 CJS
 import curve from '@foxleys-rs/curve25519';
 const {
   generateKeyPair,
-  getPublicFromPrivateKey,
+  getPublicFromprivKey,
   calculateAgreement,
   calculateSignature,
   verifySignature,
 } = curve;
 */
 // ESM
-import { generateKeyPair, getPublicFromPrivateKey, calculateAgreement, calculateSignature, verifySignature } from '@foxleys-rs/curve25519';
-
+import {
+	generateKeyPair,
+	getPublicFromPrivateKey,
+	calculateAgreement,
+	calculateSignature,
+	verifySignature
+} from "@foxleys-rs/curve25519";
 
 // Generate a new key pair
-const { privateKey, publicKey } = generateKeyPair();
+const { pubKey, privKey } = generateKeyPair();
 
-console.log('Private key:', privateKey.toString('hex'));
-console.log('Public key :', publicKey.toString('hex'));
+console.log("Public key :", pubKey);
+console.log("Private key:", privKey);
 
 // Derive public key from an existing private key (optional)
-const publicKey2 = getPublicFromPrivateKey(privateKey);
+const pubKey2 = getPublicFromPrivateKey(privKey);
 
 // Perform ECDH key exchange
-const sharedSecret = calculateAgreement(privateKey, publicKey);
-console.log('Shared secret:', sharedSecret.toString('hex'));
+const sharedSecret = calculateAgreement(pubKey, privKey);
+console.log("Shared secret:", sharedSecret);
 
 // Sign a message (Ed25519)
-const message = Buffer.from('Hello, Curve25519!');
-const signature = calculateSignature(privateKey, message);
+const message = Buffer.from("Hello, Curve25519!");
+const signature = calculateSignature(privKey, message);
 
 // Verify signature
-const isValid = verifySignature(publicKey, message, signature);
-console.log('Signature valid:', isValid);
+const isValid = verifySignature(pubKey, message, signature);
+console.log("Signature valid:", isValid);
 ```
 
 All functions accept `Buffer` as input.
@@ -117,11 +121,11 @@ All functions accept `Buffer` as input.
 
 | Function                        | Description                                      | Returns                         |
 |---------------------------------|--------------------------------------------------|---------------------------------|
-| `generateKeyPair()`             | Generates a new X25519 key pair                  | `{ privateKey: Buffer, publicKey: Buffer }` |
-| `getPublicFromPrivateKey(pk)`   | Derives public key from private key              | `Buffer` (33 bytes)         |
-| `calculateAgreement(priv, pub)` | Computes X25519 shared secret                    | `Buffer` (32 bytes)         |
-| `calculateSignature(priv, msg)` | Signs message with Ed25519                       | `Buffer` (64 bytes)         |
-| `verifySignature(pub, msg, sig)`| Verifies Ed25519 signature                       | `boolean`                       |
+| `generateKeyPair()`             | Generates a new X25519 key pair                  | `{ privKey: Buffer, pubKey: Buffer }` |
+| `getPublicFromPrivateKey(privKey)`   | Derives public key from private key              | `Buffer` (33 bytes)         |
+| `calculateAgreement(pubKey, privKey)` | Computes X25519 shared secret                    | `Buffer` (32 bytes)         |
+| `calculateSignature(privKey, msg)` | Signs message with Ed25519                       | `Buffer` (64 bytes)         |
+| `verifySignature(pubKey, msg, sig)`| Verifies Ed25519 signature                       | `boolean`                       |
 
 ---
 
