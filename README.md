@@ -71,7 +71,8 @@ This package ships prebuilt native binaries via napi-rs for all major platforms 
 
 ## Usage
 
-```js/*/*
+```js
+/*
 CJS
 import curve from '@foxleys-rs/curve25519';
 const {
